@@ -10,7 +10,7 @@ const product = {
   id: 1,
   price: 250000,
   stock: 5,
-  images: ["https://placehold.co/400x300?text=Image+1&font=roboto","https://placehold.co/400x300?text=Image+2&font=roboto","https://placehold.co/400x300?text=Image+3&font=roboto"],
+  images: ["https://placehold.co/500x500?text=Image+1&font=roboto","https://placehold.co/500x500?text=Image+2&font=roboto","https://placehold.co/500x500?text=Image+3&font=roboto"],
   category: "کتاب",
   title: "عبای زنانه طرح عربی",
   description : 'این لباس زیبا با پارچهی ابریشم نرم و لطیف دوخته شده و طرح گلهای ظریف روی آن، جلوهی خاصی به آن بخشیده است. یقهی هفت و آستینهای کوتاه، این لباس را برای مهمانیهای شبانه یا مجالس شیک ایدئال کرده است. تنگی مناسب در کمر و گشادی پایین دامن، ترکیبی جذاب و زنانه ایجاد میکند که هر بینندهای را مجذوب خود خواهد کرد.'
