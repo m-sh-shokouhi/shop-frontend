@@ -1,0 +1,61 @@
+{
+    "total_price": 250000,
+    "items":[
+        {
+            "id": 1,
+            "name": "پیراهن آسین بلند مردانه",
+            "price": 250000,
+            "images": [
+                "https://placehold.co/500x500?text=Image+1&font=roboto",
+                "https://placehold.co/500x500?text=Image+2&font=roboto",
+                "https://placehold.co/500x500?text=Image+3&font=roboto",
+                "https://placehold.co/500x500?text=Image+4&font=roboto"
+            ],
+            "quantity":1,
+            "description": "پیراهن سفید"
+        },
+        {
+            "id": 2,
+            "name": "شلوار جین مردانه",
+            "price": 180000,
+            "images": [
+                "https://placehold.co/500x500?text=Jeans+1&font=roboto",
+                "https://placehold.co/500x500?text=Jeans+2&font=roboto"
+            ],
+            "quantity":1,
+            "description": "شلوار جین آبی"
+        },
+        {
+            "id": 3,
+            "name": "کتونی ورزشی",
+            "price": 320000,
+            "images": [
+                "https://placehold.co/500x500?text=Shoes+1&font=roboto",
+                "https://placehold.co/500x500?text=Shoes+2&font=roboto"
+            ],
+            "quantity":1,
+            "description": "کتونی ورزشی مشکی"
+        },
+        {
+            "id": 4,
+            "name": "کلاه کپ",
+            "price": 75000,
+            "images": [
+                "https://placehold.co/500x500?text=Cap+1&font=roboto"
+            ],
+            "quantity": 3,
+            "description": "کلاه کپ مشکی"
+        },
+        {
+            "id": 5,
+            "name": "مانتو زنانه",
+            "price": 420000,
+            "images": [
+                "https://placehold.co/500x500?text=Manto+1&font=roboto",
+                "https://placehold.co/500x500?text=Manto+2&font=roboto"
+            ],
+            "quantity":1,
+            "description": "مانتو مشکی زنانه"
+        }
+    ]
+}

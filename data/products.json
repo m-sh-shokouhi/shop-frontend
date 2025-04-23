@@ -1,0 +1,124 @@
+[
+    {
+        "id": 1,
+        "name": "پیراهن آسین بلند مردانه",
+        "price": 250000,
+        "images": [
+            "https://placehold.co/500x500?text=Image+1&font=roboto",
+            "https://placehold.co/500x500?text=Image+2&font=roboto",
+            "https://placehold.co/500x500?text=Image+3&font=roboto",
+            "https://placehold.co/500x500?text=Image+4&font=roboto"
+        ],
+        "stock": 5,
+        "description": "پیراهن سفید"
+    },
+    {
+        "id": 2,
+        "name": "شلوار جین مردانه",
+        "price": 180000,
+        "images": [
+            "https://placehold.co/500x500?text=Jeans+1&font=roboto",
+            "https://placehold.co/500x500?text=Jeans+2&font=roboto"
+        ],
+        "stock": 8,
+        "description": "شلوار جین آبی"
+    },
+    {
+        "id": 3,
+        "name": "کتونی ورزشی",
+        "price": 320000,
+        "images": [
+            "https://placehold.co/500x500?text=Shoes+1&font=roboto",
+            "https://placehold.co/500x500?text=Shoes+2&font=roboto"
+        ],
+        "stock": 3,
+        "description": "کتونی ورزشی مشکی"
+    },
+    {
+        "id": 4,
+        "name": "کلاه کپ",
+        "price": 75000,
+        "images": [
+            "https://placehold.co/500x500?text=Cap+1&font=roboto"
+        ],
+        "stock": 12,
+        "description": "کلاه کپ مشکی"
+    },
+    {
+        "id": 5,
+        "name": "مانتو زنانه",
+        "price": 420000,
+        "images": [
+            "https://placehold.co/500x500?text=Manto+1&font=roboto",
+            "https://placehold.co/500x500?text=Manto+2&font=roboto"
+        ],
+        "stock": 4,
+        "description": "مانتو مشکی زنانه"
+    },
+    {
+        "id": 6,
+        "name": "کفش چرم مردانه",
+        "price": 380000,
+        "images": [
+            "https://placehold.co/500x500?text=Leather+Shoes+1&font=roboto",
+            "https://placehold.co/500x500?text=Leather+Shoes+2&font=roboto"
+        ],
+        "stock": 6,
+        "description": "کفش چرم قهوه ای"
+    },
+    {
+        "id": 7,
+        "name": "روسری ابریشمی",
+        "price": 95000,
+        "images": [
+            "https://placehold.co/500x500?text=Scarf+1&font=roboto",
+            "https://placehold.co/500x500?text=Scarf+2&font=roboto"
+        ],
+        "stock": 15,
+        "description": "روسری ابریشمی صورتی"
+    },
+    {
+        "id": 8,
+        "name": "ساعت مچی",
+        "price": 550000,
+        "images": [
+            "https://placehold.co/500x500?text=Watch+1&font=roboto",
+            "https://placehold.co/500x500?text=Watch+2&font=roboto"
+        ],
+        "stock": 2,
+        "description": "ساعت مچی مردانه"
+    },
+    {
+        "id": 9,
+        "name": "کیف اداری",
+        "price": 210000,
+        "images": [
+            "https://placehold.co/500x500?text=Bag+1&font=roboto",
+            "https://placehold.co/500x500?text=Bag+2&font=roboto"
+        ],
+        "stock": 7,
+        "description": "کیف اداری چرمی"
+    },
+    {
+        "id": 10,
+        "name": "تیشرت مردانه",
+        "price": 120000,
+        "images": [
+            "https://placehold.co/500x500?text=T-Shirt+1&font=roboto",
+            "https://placehold.co/500x500?text=T-Shirt+2&font=roboto"
+        ],
+        "stock": 10,
+        "description": "تیشرت سفید ساده"
+    },
+    {
+        "id": 11,
+        "name": "دامن زنانه",
+        "price": 160000,
+        "images": [
+            "https://placehold.co/500x500?text=Skirt+1&font=roboto",
+            "https://placehold.co/500x500?text=Skirt+2&font=roboto"
+        ],
+        "stock": 5,
+        "description": "دامن مشکی زنانه"
+    }
+]
