@@ -23,6 +23,7 @@ import {
   SitemarkIcon,
 } from "@/components/CustomIcons";
 import { useUser } from "@/app/_context/UserContext";
+import { redirect } from "next/navigation";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -66,14 +67,17 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignIn(props) {
+export default function SignInPage(props) {
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const { token } = useUser();
-  console.log(token);
+  const { token, signIn, user } = useUser();
+  if (user) {
+    console.log(user);
+    redirect("/");
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -88,21 +92,18 @@ export default function SignIn(props) {
       return;
     }
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    signIn(data.get("username"), data.get("password"));
   };
 
   const validateInputs = () => {
-    const email = document.getElementById("email");
+    const username = document.getElementById("username");
     const password = document.getElementById("password");
 
     let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+    if (!username.value) {
       setEmailError(true);
-      setEmailErrorMessage("Please enter a valid email address.");
+      setEmailErrorMessage("نام کاربری را وارد کنید");
       isValid = false;
     } else {
       setEmailError(false);
@@ -111,7 +112,7 @@ export default function SignIn(props) {
 
     if (!password.value || password.value.length < 6) {
       setPasswordError(true);
-      setPasswordErrorMessage("Password must be at least 6 characters long.");
+      setPasswordErrorMessage("رمز عبور باید حداقل ۷ کاراکتر باشد");
       isValid = false;
     } else {
       setPasswordError(false);
@@ -135,7 +136,7 @@ export default function SignIn(props) {
             variant="h4"
             sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
           >
-            Sign in
+            ورود
           </Typography>
           <Box
             component="form"
@@ -149,15 +150,14 @@ export default function SignIn(props) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">نام کاربری</FormLabel>
               <TextField
                 error={emailError}
                 helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                autoComplete="email"
+                id="username"
+                type="text"
+                name="username"
+                placeholder="نام کاربری"
                 autoFocus
                 required
                 fullWidth
@@ -166,7 +166,7 @@ export default function SignIn(props) {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">رمز عبور</FormLabel>
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
@@ -182,10 +182,10 @@ export default function SignIn(props) {
                 color={passwordError ? "error" : "primary"}
               />
             </FormControl>
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button
               type="submit"
@@ -193,7 +193,7 @@ export default function SignIn(props) {
               variant="contained"
               onClick={validateInputs}
             >
-              Sign in
+              ورود
             </Button>
             <Link
               component="button"
@@ -202,7 +202,7 @@ export default function SignIn(props) {
               variant="body2"
               sx={{ alignSelf: "center" }}
             >
-              Forgot your password?
+              رمز عبورتان را فراموش کرده‌اید؟
             </Link>
           </Box>
           <Divider>or</Divider>
@@ -213,24 +213,16 @@ export default function SignIn(props) {
               onClick={() => alert("Sign in with Google")}
               startIcon={<GoogleIcon />}
             >
-              Sign in with Google
-            </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => alert("Sign in with Facebook")}
-              startIcon={<FacebookIcon />}
-            >
-              Sign in with Facebook
+              ورود با گوگل
             </Button>
             <Typography sx={{ textAlign: "center" }}>
-              Don&apos;t have an account?{" "}
+              حساب کاربری ندارید؟{" "}
               <Link
                 href="/material-ui/getting-started/templates/sign-in/"
                 variant="body2"
                 sx={{ alignSelf: "center" }}
               >
-                Sign up
+                ثبت نام کنید
               </Link>
             </Typography>
           </Box>
