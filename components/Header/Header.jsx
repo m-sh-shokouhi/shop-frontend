@@ -22,6 +22,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useUser } from "@/app/_context/UserContext";
+import { useCart } from "@/app/_context/CartContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -65,7 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   const { user, signOut } = useUser();
-  console.log(user);
+  const { cart } = useCart();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -144,7 +145,7 @@ export default function Header() {
           aria-label="show 4 new mails"
           color="inherit"
         >
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={cart.count} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -216,7 +217,7 @@ export default function Header() {
                 aria-label="show products in cart"
                 color="inherit"
               >
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={cart.count} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
