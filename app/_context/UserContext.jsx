@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await fetch(`${API_URL}auth/me`, {
+      const res = await fetch(`${API_URL}/auth/me`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${token}`,
@@ -43,7 +43,7 @@ export const UserContextProvider = ({ children }) => {
 
   const signIn = async (username, password) => {
     try {
-      const res = await fetch(`${API_URL}auth/login/`, {
+      const res = await fetch(`${API_URL}/auth/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
