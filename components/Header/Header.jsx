@@ -145,7 +145,7 @@ export default function Header() {
           aria-label="show 4 new mails"
           color="inherit"
         >
-          <Badge badgeContent={cart.count} color="error">
+          <Badge badgeContent={0} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -217,7 +217,10 @@ export default function Header() {
                 aria-label="show products in cart"
                 color="inherit"
               >
-                <Badge badgeContent={cart.count} color="error">
+                <Badge
+                  badgeContent={cart.items ? cart.items.length : 0}
+                  color="error"
+                >
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
@@ -226,7 +229,10 @@ export default function Header() {
                 aria-label="show new notifications"
                 color="inherit"
               >
-                <Badge badgeContent={25} color="error">
+                <Badge
+                  badgeContent={cart.items ? cart.items.length : 0}
+                  color="error"
+                >
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
