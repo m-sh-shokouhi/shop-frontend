@@ -5,7 +5,9 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@/components/Link/Link";
 import { API_URL } from "@/config";
 
-import { AddToCart, ProductImageCarousel } from "@/components";
+import { ProductCartHandler, ProductImageCarousel } from "@/components";
+import { useCart } from "@/app/_context/CartContext";
+
 const test = {
   id: 1,
   price: 250000,
@@ -23,10 +25,13 @@ const test = {
 
 export default async function ProductPage({ params }) {
   const { product_slug } = await params;
-  const product = await fetch(`${API_URL}products/${product_slug}`).then(
-    (resp) => resp.json()
-  );
-  console.log(product);
+  let product;
+  try {
+    const resp = await fetch(`${API_URL}/products/${product_slug}`);
+    product = await resp.json();
+  } catch (err) {
+    console.log(err);
+  }
   return (
     <>
       <Grid container>
@@ -63,7 +68,10 @@ export default async function ProductPage({ params }) {
               <Typography variant="body1">{product.description}</Typography>
             </Grid>
             <Grid sx={{ marginTop: "15px" }}>
-              <AddToCart productId={product.id} stock={product.stock} />
+              <ProductCartHandler
+                productId={product.id}
+                stock={product.stock}
+              />
             </Grid>
           </Grid>
         </Grid>
@@ -73,7 +81,8 @@ export default async function ProductPage({ params }) {
 }
 
 export async function generateStaticParams() {
-  const products = await fetch(`${API_URL}products/`).then((res) => res.json());
+  const resp = await fetch(`${API_URL}/products/`);
+  const product = await resp.json();
   console.log(products);
   return products.map((product) => ({
     product_slug: product.slug,
