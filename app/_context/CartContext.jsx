@@ -1,54 +1,72 @@
+"use client";
 // context/CartContext.js
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { useUser } from "./UserContext";
+import { API_URL } from "@/config";
+import { Co2Sharp } from "@mui/icons-material";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
-  c;
-  // Load cart from localStorage on initial render
-  useEffect(() => {}, []);
-
-  const fetchCart = () => {
-    return;
-  };
-
-  // Update cartCount and cartTotal whenever cart changes
+  const [cart, setCart] = useState({});
+  const { user, token } = useUser();
+  // Load cart from backend  on initial render
   useEffect(() => {
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
 
-    setCartCount(count);
-    setCartTotal(total);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  const fetchCart = async () => {
+    try {
+      const resp = await fetch(`${API_URL}/carts/latest/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      });
 
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      // Check if product already exists in cart
-      const existingItem = prevCart.find((item) => item.id === product.id);
-
-      if (existingItem) {
-        // Update quantity if product exists
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
-            : item
-        );
-      } else {
-        // Add new product to cart
-        return [...prevCart, { ...product, quantity: product.quantity || 1 }];
-      }
-    });
+      const data = await resp.json();
+      setCart(data);
+    } catch (err) {
+      log(err);
+    }
   };
 
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  const addToCart = async (productId, quantity) => {
+    try {
+      const resp = await fetch(`${API_URL}/cart-items/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({ product: productId, cart: cart.id, quantity }),
+      });
+      const data = await resp.json();
+      if (resp.ok) {
+        fetchCart();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromCart = async (cartItemId) => {
+    try {
+      const resp = await fetch(`${API_URL}/cart-items/${cartItemId}/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      });
+      if (resp.ok) {
+        fetchCart();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const updateQuantity = (productId, newQuantity) => {
@@ -73,8 +91,6 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
-        cartCount,
-        cartTotal,
         addToCart,
         removeFromCart,
         updateQuantity,

@@ -15,7 +15,9 @@ const ProductCartHandler = ({ productId, stock }) => {
     return <>برای خرید ابتدا ثبت نام کنید</>;
   }
 
-  const { AddToCart, removeFromCart } = useCart();
+  const { addToCart, removeFromCart, cart } = useCart();
+
+  const cartItem = cart.items.filter((item) => item.product == productId)[0];
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrease = () => {
@@ -25,30 +27,48 @@ const ProductCartHandler = ({ productId, stock }) => {
     if (quantity > 1) setQuantity((prev) => prev - 1);
   };
 
-  const onAddToCart = (produc) => {
-    AddToCart(productId, quantity);
+  const onAddToCart = () => {
+    addToCart(productId, quantity);
+  };
+
+  const onRemoveFromCart = (cartItemId) => {
+    removeFromCart(cartItemId);
   };
 
   return (
     <Box display="flex" alignItems="center" gap={2}>
-      <IconButton color="primary" onClick={handleDecrease}>
-        <RemoveIcon />
-      </IconButton>
+      {cartItem ? (
+        <>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => onRemoveFromCart(cartItem.id)}
+            sx={{ marginLeft: 2 }}
+          >
+            حذف از سبد خرید
+          </Button>
+        </>
+      ) : (
+        <>
+          <IconButton color="primary" onClick={handleDecrease}>
+            <RemoveIcon />
+          </IconButton>
 
-      <Typography variant="h6">{quantity}</Typography>
+          <Typography variant="h6">{quantity}</Typography>
 
-      <IconButton color="primary" onClick={handleIncrease}>
-        <AddIcon />
-      </IconButton>
-
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => onAddToCart(productId, quantity)}
-        sx={{ marginLeft: 2 }}
-      >
-        اضافه کردن به سبد خرید
-      </Button>
+          <IconButton color="primary" onClick={handleIncrease}>
+            <AddIcon />
+          </IconButton>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => onAddToCart(productId, quantity)}
+            sx={{ marginLeft: 2 }}
+          >
+            اضافه کردن به سبد خرید
+          </Button>
+        </>
+      )}
     </Box>
   );
 };
