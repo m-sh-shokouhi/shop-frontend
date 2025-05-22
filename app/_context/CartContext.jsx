@@ -69,17 +69,35 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity < 1) {
-      removeFromCart(productId);
-      return;
+  const updateQuantity = async (item, type) => {
+    var newQuantity = 1;
+    if (type === "inc") {
+      newQuantity = item.quantity + 1;
+    } else {
+      if (item.quantity == 1) {
+        removeFromCart(item.id);
+      } else {
+        newQuantity = item.quantity - 1;
+      }
     }
 
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    try {
+      const resp = await fetch(`${API_URL}/cart-items/${item.id}/`, {
+        method: "PATCH",
+        body: JSON.stringify({ quantity: newQuantity }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      });
+      if (resp.ok) {
+        fetchCart();
+      } else {
+        console.log("it is not possible change");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const clearCart = () => {
