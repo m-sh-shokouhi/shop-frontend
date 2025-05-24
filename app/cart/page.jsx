@@ -58,7 +58,12 @@ const Cart = () => {
           >
             ادامه خرید
           </Button>
-          <Button variant="contained" color="success" size="large">
+          <Button
+            variant="contained"
+            color="success"
+            size="large"
+            onClick={() => router.push("/cart/address/")}
+          >
             انتخاب آدرس
           </Button>
         </Grid>
